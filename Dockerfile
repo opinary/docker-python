@@ -8,7 +8,7 @@ RUN /google-cloud-sdk/bin/gcloud --quiet components update
 ENV PATH="/google-cloud-sdk/bin:${PATH}"
 
 # install docker client
-ENV DOCKER_VER="20.10.6-ce"
+ENV DOCKER_VER="17.03.0-ce"
 RUN curl -L -o /tmp/docker-${DOCKER_VER}.tgz https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VER}.tgz
 RUN tar -xz -C /tmp -f /tmp/docker-${DOCKER_VER}.tgz
 RUN mv /tmp/docker/* /usr/bin
