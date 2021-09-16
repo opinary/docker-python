@@ -1,0 +1,23 @@
+version: 2.1
+executors:
+  docker-publisher:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context:
+            - push-to-dockerhub
+jobs:
+  build:
+    executor: docker-publisher
+    working_directory: ~/automation
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run: docker build . -t opinarygmbh/automation
+      - run: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run: docker push opinarygmbh/automation:latest
+
