@@ -12,9 +12,3 @@ ENV DOCKER_VER="17.03.0-ce"
 RUN curl -L -o /tmp/docker-${DOCKER_VER}.tgz https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VER}.tgz
 RUN tar -xz -C /tmp -f /tmp/docker-${DOCKER_VER}.tgz
 RUN mv /tmp/docker/* /usr/bin
-
-# instal python dependencies
-# python dependencies for automation services
-COPY requirements.txt requirements.txt
-RUN pip3 install --upgrade pip setuptools
-RUN pip3 install -r requirements.txt
