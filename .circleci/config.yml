@@ -17,7 +17,13 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - run: docker build . -t opinarygmbh/automation
+      - run: docker build -t "opinarygmbh/automation:$CIRCLE_SHA1" .
       - run: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-      - run: docker push opinarygmbh/automation:latest
-
+      - run: docker push "opinarygmbh/automation:$CIRCLE_SHA1"
+      - deploy:
+          name: Build and push latest image tag
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker build -t opinarygmbh/automation:latest .
+              docker push opinarygmbh/automation:latest    
+            fi
