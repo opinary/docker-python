@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.6
 
 # install google-cloud-sdk
 ENV GCSDK_VER="363.0.0"
